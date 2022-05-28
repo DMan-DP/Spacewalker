@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutoHand {
+    [RequireComponent(typeof(HandTouchEvent))]
     public class HandTouchButton : MonoBehaviour {
         [NaughtyAttributes.HideIf("startUnpress")]
         public bool startPress = false;
@@ -24,6 +25,16 @@ namespace AutoHand {
         bool pressed = false;
 
         private void Start() {
+            if (button == null)
+            {
+                button = transform;
+            }
+
+            if (touchEvent == null)
+            {
+                touchEvent = GetComponent<HandTouchEvent>();
+            }
+            
             if(startPress)
                 PressButton(null);
             else if(startUnpress)
@@ -59,7 +70,7 @@ namespace AutoHand {
                 button.localPosition += pressOffset;
             pressed = true;
             OnPressed?.Invoke(hand);
-            button.GetComponent<MeshRenderer>().material.color = pressColor;
+            //button.GetComponent<MeshRenderer>().material.color = pressColor;
         }
 
         void ReleaseButton(Hand hand) {
@@ -67,7 +78,7 @@ namespace AutoHand {
                 button.localPosition -= pressOffset;
             pressed = false; 
             OnUnpressed?.Invoke(hand);
-            button.GetComponent<MeshRenderer>().material.color = unpressColor;
+            //button.GetComponent<MeshRenderer>().material.color = unpressColor;
         }
     }
 }

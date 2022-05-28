@@ -654,7 +654,7 @@ namespace Autohand {
             closestHits.Clear();
 
             for(int i = 0; i < handRays.Length; i++) {
-                Debug.DrawRay(palmPosition - palmForward * sphereCastRadius, palmRotation * handRays[i] * dist, Color.red, Time.fixedUnscaledDeltaTime * 2f);
+                //Debug.DrawRay(palmPosition - palmForward * sphereCastRadius, palmRotation * handRays[i] * dist, Color.red, Time.fixedUnscaledDeltaTime * 2f);
                 if(Physics.SphereCast(palmPosition - palmForward * sphereCastRadius, sphereCastRadius, palmRotation * handRays[i], out rayHits[i], dist, layerMask, queryTriggerInteraction)) {
                     if(palmTransform.InverseTransformPoint(rayHits[i].point).z > 0) {
 
