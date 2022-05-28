@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Client
+{
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+        #region MonoBehaviour Methods
+        private void Start()
+        {
+            // Start is called before the first frame update
+        }
+    
+        private void Update()
+        {
+            // Update is called once per frame
+        }
+        #endregion
+    }
+}
