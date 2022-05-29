@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5492182837184060974
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,9 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI Button Negative
-  m_Shader: {fileID: -6465566751694194690, guid: 697e49105e726174186ccdb7d9e9e776,
-    type: 3}
+  m_Name: Hologram Ring
+  m_Shader: {fileID: 4800000, guid: 3791ba6df184993488b5a3e5f452db10, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -34,12 +20,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 1b1ecd5e440b81849ad8395b3bf7f6e8, type: 3}
+    - _HologramTexture:
+        m_Texture: {fileID: 2800000, guid: a795ba5b56ec7ee46b1b0c9e82d2d7c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,7 +37,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Alpha: 0.5
+    - _FrenelPower: 0.9
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ScrollSpeed: 0
     m_Colors:
-    - _Color: {r: 5.992157, g: 2.6437583, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 1.8621985, b: 6.24, a: 1}
+    - _FresnelColor: {r: 0, g: 0.4862745, b: 1.4980392, a: 1}
+    - _HologramTextureTiling: {r: 1, g: 32, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &3689920437173889751
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5

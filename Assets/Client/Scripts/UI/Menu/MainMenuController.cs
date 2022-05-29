@@ -21,6 +21,7 @@ namespace Client
 
         public void ShowMainMenu()
         {
+            EnterButton.GetComponent<Collider>().enabled = false;
             EnterButton.GetComponent<Animator>().SetBool("IsHideButton", true);
             StartCoroutine(ShowMainMenuPanel());
         }

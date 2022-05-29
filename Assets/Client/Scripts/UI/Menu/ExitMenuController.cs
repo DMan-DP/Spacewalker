@@ -12,12 +12,14 @@ namespace Client
         
         private void Start()
         {
+            ExitButton.SetActive(true);
             ConfirmExitPanel.SetActive(false);
         }
         
         public void ShowConfirmMenu()
         {
             ExitButton.GetComponent<Animator>().SetBool("IsHideButton", true);
+            ExitButton.GetComponent<Collider>().enabled = false;
             StartCoroutine(ShowPanel());
         }
 
@@ -25,6 +27,7 @@ namespace Client
         {
             ConfirmExitPanel.SetActive(false);
             ExitButton.GetComponent<Animator>().SetBool("IsHideButton", false);
+            ExitButton.GetComponent<Collider>().enabled = true;
         }
 
         public void QuitGame()
