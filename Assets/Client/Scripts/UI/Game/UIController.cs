@@ -1,64 +1,79 @@
-using UnityEditor;
 using UnityEngine;
 
 namespace Client
 {
-	public class UIController : MonoBehaviour
-	{
-		public GameObject ButtonPanel;
-		[Space]
-		public GameObject Panel;
-		[Space]
-		[Header("UI Panels")]
-		public GameObject PanelMenu;
-		public GameObject MenuPause;
-		public GameObject SettingsMenu;
-		public GameObject ExitMenu;
-		public void OpenPanel()
-		{
-			PanelMenu.SetActive(true);
-			Panel.SetActive(true);
-			ButtonPanel.SetActive(false);
-		}
+    public class UIController : MonoBehaviour
+    {
+        private static readonly int showPanelMenu = Animator.StringToHash("ShowPanelMenu");
+        public GameObject ButtonPanel;
 
-		public void ClosePanel()
-		{
-			HideAllUIPanels();
-			Panel.SetActive(false);
-			ButtonPanel.SetActive(true);
-		}
+        private Animator animator;
 
-		private void HideAllUIPanels()
-		{
-			PanelMenu.SetActive(false);
-			MenuPause.SetActive(false);
-			SettingsMenu.SetActive(false);
-			ExitMenu.SetActive(false);
-		}
+        private UIState uiState;
 
-		public void OnPause()
-		{
-			HideAllUIPanels();
-			MenuPause.SetActive(true);
-		}
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
-		public void OnSettings()
-		{
-			HideAllUIPanels();
-			SettingsMenu.SetActive(true);
-		}
-		
-		public void OnExit()
-		{
-			HideAllUIPanels();
-			SettingsMenu.SetActive(true);
-		}
-		
-		private void Start()
-		{
-			HideAllUIPanels();
-			ButtonPanel.SetActive(true);
-			Panel.SetActive(false);
-		}
-	}
+        public void ButtonPanelClick()
+        {
+            switch (uiState)
+            {
+                case UIState.Idle:
+                {
+                    animator.SetBool(showPanelMenu, true);
+                    uiState = UIState.MainPanel;
+                    break;
+                }
+                case UIState.MainPanel:
+                {
+                    ResetPanel();
+                    break;
+                }
+                case UIState.Scanner:
+                {
+                    ResetPanel();
+                    break;
+                }
+                case UIState.MenuPanel:
+                {
+                    ResetPanel();
+                    break;
+                }
+            }
+        }
+
+        public void OpenScanner()
+        {
+            if (uiState == UIState.MainPanel)
+            {
+                animator.SetBool(showPanelMenu, false);
+                uiState = UIState.Scanner;
+            }
+        }
+
+        public void OpenMenu()
+        {
+            if (uiState == UIState.MainPanel)
+            {
+                animator.SetBool(showPanelMenu, false);
+                uiState = UIState.MenuPanel;
+            }
+        }
+
+        private void ResetPanel()
+        {
+            animator.SetBool(showPanelMenu, false);
+            uiState = UIState.Idle;
+        }
+
+        private enum UIState
+        {
+            Idle,
+            MainPanel,
+            Scanner,
+            MenuPanel
+        }
+    }
 }
