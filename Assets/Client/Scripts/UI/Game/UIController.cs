@@ -4,16 +4,30 @@ namespace Client
 {
     public class UIController : MonoBehaviour
     {
-        private static readonly int showPanelMenu = Animator.StringToHash("ShowPanelMenu");
         public GameObject ButtonPanel;
-
-        private Animator animator;
+        public GameObject TaskPanel;
+        public Vector3 LookAtCameraWorldUp = Vector3.forward;
 
         private UIState uiState;
+
+        private Camera mainCamera;
+        private Animator animator;
+        private static readonly int showMainPanel = Animator.StringToHash("ShowMainPanel");
+        private static readonly int showMenuPanel = Animator.StringToHash("ShowMenuPanel");
+        private static readonly int showScannerPanel = Animator.StringToHash("ShowScannerPanel");
 
         private void Start()
         {
             animator = GetComponent<Animator>();
+            mainCamera = Camera.main;
+        }
+
+        private void Update()
+        {
+            if (uiState == UIState.MainPanel)
+            {
+                TaskPanel.transform.LookAt(mainCamera.transform, LookAtCameraWorldUp);
+            }
         }
 
         public void ButtonPanelClick()
@@ -22,23 +36,14 @@ namespace Client
             {
                 case UIState.Idle:
                 {
-                    animator.SetBool(showPanelMenu, true);
-                    uiState = UIState.MainPanel;
+                    SetUIState(UIState.MainPanel);
                     break;
                 }
                 case UIState.MainPanel:
-                {
-                    ResetPanel();
-                    break;
-                }
                 case UIState.Scanner:
-                {
-                    ResetPanel();
-                    break;
-                }
                 case UIState.MenuPanel:
                 {
-                    ResetPanel();
+                    SetUIState(UIState.Idle);
                     break;
                 }
             }
@@ -48,8 +53,7 @@ namespace Client
         {
             if (uiState == UIState.MainPanel)
             {
-                animator.SetBool(showPanelMenu, false);
-                uiState = UIState.Scanner;
+                SetUIState(UIState.Scanner);
             }
         }
 
@@ -57,15 +61,41 @@ namespace Client
         {
             if (uiState == UIState.MainPanel)
             {
-                animator.SetBool(showPanelMenu, false);
-                uiState = UIState.MenuPanel;
+                SetUIState(UIState.MenuPanel);
             }
         }
 
-        private void ResetPanel()
+        private void SetUIState(UIState newUIState)
         {
-            animator.SetBool(showPanelMenu, false);
-            uiState = UIState.Idle;
+            uiState = newUIState;
+            switch (newUIState)
+            {
+                case UIState.Idle:
+                {
+                    animator.SetBool(showMainPanel, false);
+                    animator.SetBool(showMenuPanel, false);
+                    animator.SetBool(showScannerPanel, false);
+                    uiState = UIState.Idle;
+                    break;
+                }
+                case UIState.MainPanel:
+                {
+                    animator.SetBool(showMainPanel, true);
+                    break;
+                }
+                case UIState.MenuPanel:
+                {
+                    animator.SetBool(showMainPanel, false);
+                    animator.SetBool(showMenuPanel, true);
+                    break;
+                }
+                case UIState.Scanner:
+                {
+                    animator.SetBool(showMainPanel, false);
+                    animator.SetBool(showScannerPanel, true);
+                    break;
+                }
+            }
         }
 
         private enum UIState

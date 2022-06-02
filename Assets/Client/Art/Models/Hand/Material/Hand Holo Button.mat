@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Holo Button
+  m_Name: Hand Holo Button
   m_Shader: {fileID: 4800000, guid: 3791ba6df184993488b5a3e5f452db10, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -122,6 +122,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Use_UV: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
