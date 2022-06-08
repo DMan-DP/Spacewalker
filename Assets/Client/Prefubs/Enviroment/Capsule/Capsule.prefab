@@ -1286,7 +1286,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7005632490542073965}
-  - component: {fileID: 4561781609518806372}
+  - component: {fileID: 741070827376925306}
+  - component: {fileID: 3437586935693268351}
   - component: {fileID: 8347988727343254770}
   m_Layer: 0
   m_Name: Capsule
@@ -1314,23 +1315,123 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &4561781609518806372
-Animation:
+--- !u!95 &741070827376925306
+Animator:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5472341347425477315}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 9cb746adce82e6543a605201173f61cc, type: 2}
-  - {fileID: 7400000, guid: fd5768395b8c74e4e9f6812e4beb2f5b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc9adeac9e2a2db449919ef877b71c27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &3437586935693268351
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5472341347425477315}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5273685732763321411, guid: 6d1ed7444d72c1843870d3104cd05a62,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8347988727343254770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,14 +1444,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a0209d15d7508488e14e27e1af42b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenDoorAnimationClip: {fileID: 7400000, guid: 9cb746adce82e6543a605201173f61cc,
-    type: 2}
-  onDoorOpenedEvent:
+  openDoorAudioClip: {fileID: 8300000, guid: 8a7202a315e85fe47ac3728a1aa2c214, type: 3}
+  OnDoorOpenedEvent:
     m_PersistentCalls:
       m_Calls: []
-  CloseDoorAnimationClip: {fileID: 7400000, guid: fd5768395b8c74e4e9f6812e4beb2f5b,
-    type: 2}
-  onDoorClosedEvent:
+  closeDoorAudioClip: {fileID: 8300000, guid: 8d6a7b70c5a818a4ea990875b9447ccc, type: 3}
+  OnDoorClosedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7130138111517792544

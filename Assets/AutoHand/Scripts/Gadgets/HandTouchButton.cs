@@ -24,7 +24,7 @@ namespace AutoHand {
 
         bool pressed = false;
 
-        private void Start() {
+        private void Awake() {
             if (button == null)
             {
                 button = transform;

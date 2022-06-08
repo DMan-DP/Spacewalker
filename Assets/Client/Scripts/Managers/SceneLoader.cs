@@ -1,18 +1,40 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Client
 {
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {
+        public UnityEvent SceneLoadedEvent;
+        
         private float loadingPercent;
         public static bool IsLoading { get; private set; } = false;
-        private AsyncOperation loadingSceneOperation;
-
+        private AsyncOperation loadingSceneOperation; 
+        
         public static string MenuSceneName = "Menu";
         public static string SpaceshipSceneName = "Spaceship";
 
-        public static void SwitchToScene(string sceneName)
+        private static bool shouldPlayOpeningAnimation = true;
+        private Animator blackoutAnimator;
+        private static readonly int sceneOpening = Animator.StringToHash("SceneOpening");
+        private static readonly int sceneClosing = Animator.StringToHash("SceneClosing");
+
+        protected override void Awake() { }
+        
+        private void Start() 
+        {
+            var instance = GetInstance();
+            instance.blackoutAnimator = GetComponent<Animator>();
+            
+            if (shouldPlayOpeningAnimation)
+            {
+                instance.blackoutAnimator.SetTrigger(sceneOpening);
+                shouldPlayOpeningAnimation = false; 
+            }
+        }
+
+        public static void SwitchToScene(string sceneName, bool blackoutRequired = false)
         {
             var instance = GetInstance();
             instance.loadingSceneOperation = SceneManager.LoadSceneAsync(sceneName);
@@ -22,15 +44,26 @@ namespace Client
             instance.loadingSceneOperation.allowSceneActivation = false;
             
             instance.loadingPercent = 0;
+
+            if (blackoutRequired)
+            {
+                instance.blackoutAnimator.SetTrigger(sceneClosing);
+            }
         }
         
-        public void LoadScene()
+        public static void StartLoadScene()
         {
             if (IsLoading)
             {
-                loadingSceneOperation.allowSceneActivation = true;
+                GetInstance().blackoutAnimator.SetTrigger(sceneClosing);
                 IsLoading = false;
             }
+        }
+
+        public static bool IsSceneLoaded()
+        {
+            var loadingSceneOperation = GetInstance().loadingSceneOperation;
+            return loadingSceneOperation != null && loadingSceneOperation.isDone;
         }
 
         public float GetLoadProgress()
@@ -41,6 +74,18 @@ namespace Client
             }
 
             return 0;
+        }
+        
+        public void OnAnimationOver()
+        {
+            // Чтобы при открытии сцены, куда мы переключаемся, проигралась анимация opening:
+            shouldPlayOpeningAnimation = true;
+            loadingSceneOperation.allowSceneActivation = true;
+        }
+
+        public void SceneLoadContinue()
+        {
+            SceneLoadedEvent.Invoke();
         }
     }
 }

@@ -2,59 +2,71 @@ using Autohand;
 using Client.Gameplay;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace Client
 {
 	public class PlayerCapsuleController : CapsuleControllerBase
 	{
 		[Space] 
-		public AnimationClip OpenStationAnimatonClip;
-		[SerializeField] private UnityEvent OnStationOpenedEvent;
-		
-		[Space] 
-		public AnimationClip OpenHandleAnimationClip;
-		[SerializeField] private UnityEvent OnHandOpenedEvent;
-
-		[Space] 
-		public AnimationClip CloseStationAnimationClip;
-		[SerializeField] private UnityEvent OnStationClosedEvent;
-
-		[Space] 
+		public AudioClip introAudioSequence;
 		public Transform PlayerOffset;
+		[Space] 
+		public UnityEvent OnInitPlayerSequence;
 
-		public void OpenStation()
+		private bool isStarted = false;
+		private static readonly int intro = Animator.StringToHash("Intro");
+		private static readonly int freePlayer = Animator.StringToHash("FreePlayer");
+
+		private void Start()
 		{
-			Animation.clip = OpenStationAnimatonClip;
-			Animation.Play();
+			var player = AutoHandPlayer.Instance;
+			player.allowClimbing = false;
+			player.useMovement = false;
+			player.GetComponent<XRPlayerControllerLink>().CanTurn = false;
+			player.GetComponent<PlayerFlyLocomotion>().PlayerCanFly = false;
+
+			var parentTransform = player.transform.parent;
+			parentTransform.SetParent(PlayerOffset);
+			parentTransform.localPosition = Vector3.zero;
+			parentTransform.localRotation = Quaternion.Euler(Vector3.zero);
 		}
-
-		public void OpenHandle()
+		
+		public void InitPlayerSequence()
 		{
-			Animation.clip = OpenHandleAnimationClip;
-			Animation.Play();
-		}
+			if (isStarted) return;
 
-		public void CloseStation()
-		{
-			AutoHandPlayer.Instance.transform.parent.SetParent(null, true);
+			IsOpened = true;
 			
-			Animation.clip = CloseStationAnimationClip;
-			Animation.Play();
+			AudioSource.clip = introAudioSequence;
+			AudioSource.Play();
+			Animator.SetBool(intro, true);
 		}
 
-		protected void OnStationOpened()
+		public void InitPlayerHud()
 		{
-			OnStationOpenedEvent.Invoke();
+			OnInitPlayerSequence.Invoke();
 		}
 
-		protected void OnHandleOpened()
+		public void FreePlayer()
 		{
-			OnHandOpenedEvent.Invoke();
-		}
-
-		protected void OnStationClosed()
-		{
-			OnStationClosedEvent.Invoke();
+			if (isStarted) return;
+			
+			var player = AutoHandPlayer.Instance;
+			player.allowClimbing = true;
+			player.useMovement = true;
+			player.GetComponent<XRPlayerControllerLink>().CanTurn = true;
+			player.GetComponent<PlayerFlyLocomotion>().PlayerCanFly = true;
+			
+			var parentTransform = player.transform.parent;
+			parentTransform.SetParent(null);
+			
+			AudioSource.clip = closeDoorAudioClip;
+			AudioSource.Play();
+			
+			isStarted = true;
+			Animator.SetBool(intro, false);
+			Animator.SetBool(freePlayer, true);
 		}
 	}
 }

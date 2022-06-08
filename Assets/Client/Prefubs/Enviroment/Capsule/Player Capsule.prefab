@@ -193,14 +193,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387157522876682131}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.002644, z: 0.1509}
+  m_LocalPosition: {x: -0, y: -0.002644, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6789494394736131477}
   m_Father: {fileID: 8805048891691397239}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!1 &1733725444940249670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789494394736131476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.05}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1346,7 +1346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789494396538961112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1412,7 +1412,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 6789494396538961112}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.018
   m_Height: 0.12
   m_Direction: 0
@@ -1611,11 +1611,23 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 750383118001720276}
         m_TargetAssemblyTypeName: Client.PlayerCapsuleController, Assembly-CSharp
-        m_MethodName: CloseStation
+        m_MethodName: FreePlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Client.PlayerCapsuleController, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2123,7 +2135,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6061371131519334110}
-  - component: {fileID: 750383118001720279}
+  - component: {fileID: 1815896055278100268}
+  - component: {fileID: 7090282897752553701}
   - component: {fileID: 750383118001720276}
   m_Layer: 0
   m_Name: Player Capsule
@@ -2151,26 +2164,123 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!111 &750383118001720279
-Animation:
+--- !u!82 &1815896055278100268
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9139765422680972400}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 9cb746adce82e6543a605201173f61cc, type: 2}
-  - {fileID: 7400000, guid: fd5768395b8c74e4e9f6812e4beb2f5b, type: 2}
-  - {fileID: 7400000, guid: 5924b60eb3439d24390222760ef117ca, type: 2}
-  - {fileID: 7400000, guid: 9d92137ce7987d840a1f886f405dae75, type: 2}
-  - {fileID: 7400000, guid: b81dc9e7129cd534882398a35b83d196, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5273685732763321411, guid: 6d1ed7444d72c1843870d3104cd05a62,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &7090282897752553701
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139765422680972400}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f810e74052200a44999f01ee273bd2e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &750383118001720276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,65 +2293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee73c937eab8cf4b8cfdbd1c9b254cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenDoorAnimationClip: {fileID: 7400000, guid: 9cb746adce82e6543a605201173f61cc,
-    type: 2}
-  onDoorOpenedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 750383118001720276}
-        m_TargetAssemblyTypeName: Client.PlayerCapsuleController, Assembly-CSharp
-        m_MethodName: OpenStation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CloseDoorAnimationClip: {fileID: 7400000, guid: fd5768395b8c74e4e9f6812e4beb2f5b,
-    type: 2}
-  onDoorClosedEvent:
+  openDoorAudioClip: {fileID: 8300000, guid: 8a7202a315e85fe47ac3728a1aa2c214, type: 3}
+  OnDoorOpenedEvent:
     m_PersistentCalls:
       m_Calls: []
-  OpenStationAnimatonClip: {fileID: 7400000, guid: b81dc9e7129cd534882398a35b83d196,
-    type: 2}
-  OnStationOpenedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 750383118001720276}
-        m_TargetAssemblyTypeName: Client.PlayerCapsuleController, Assembly-CSharp
-        m_MethodName: OpenHandle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OpenHandleAnimationClip: {fileID: 7400000, guid: 9d92137ce7987d840a1f886f405dae75,
-    type: 2}
-  OnHandOpenedEvent:
+  closeDoorAudioClip: {fileID: 8300000, guid: 8d6a7b70c5a818a4ea990875b9447ccc, type: 3}
+  OnDoorClosedEvent:
     m_PersistentCalls:
       m_Calls: []
-  CloseStationAnimationClip: {fileID: 7400000, guid: 5924b60eb3439d24390222760ef117ca,
-    type: 2}
-  OnStationClosedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Client.PlayerSpawn, Assembly-CSharp
-        m_MethodName: FreePlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  introAudioSequence: {fileID: 8300000, guid: ce44a8c981c840f49aacde185585318c, type: 3}
   PlayerOffset: {fileID: 6789494396620331314}

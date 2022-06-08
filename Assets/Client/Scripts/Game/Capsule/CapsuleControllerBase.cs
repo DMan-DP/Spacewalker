@@ -5,42 +5,50 @@ namespace Client.Gameplay
 {
 	public class CapsuleControllerBase : MonoBehaviour
 	{
-		[Space]
-		public AnimationClip OpenDoorAnimationClip;
-		[SerializeField] private UnityEvent onDoorOpenedEvent;
+		[SerializeField] protected AudioClip openDoorAudioClip;
+		public UnityEvent OnDoorOpenedEvent;
 		[Space] 
-		public AnimationClip CloseDoorAnimationClip;
-		[SerializeField] private UnityEvent onDoorClosedEvent;
+		[SerializeField] protected AudioClip closeDoorAudioClip;
+		public UnityEvent OnDoorClosedEvent;
 
-		protected Animation Animation;
+		public bool IsOpened { get; protected set; } = false;
+		protected Animator Animator;
+		protected AudioSource AudioSource;
+		private static readonly int isOpenDoor = Animator.StringToHash("IsOpenDoor");
+
 
 		#region MonoBehaviour Methods
 		private void Awake()
 		{
-			Animation = GetComponent<Animation>();
+			Animator = GetComponent<Animator>();
+			AudioSource = GetComponent<AudioSource>();
 		}
 		#endregion
 
 		public void OpenDoor()
 		{
-			Animation.clip = OpenDoorAnimationClip;
-			Animation.Play();
+			AudioSource.clip = openDoorAudioClip;
+			AudioSource.Play();
+			Animator.SetBool(isOpenDoor, true);
 		}
 
 		public void CloseDoor()
 		{
-			Animation.clip = CloseDoorAnimationClip;
-			Animation.Play();
+			AudioSource.clip = closeDoorAudioClip;
+			AudioSource.Play();
+			Animator.SetBool(isOpenDoor, false);
 		}
 
 		protected void OnDoorOpened()
 		{
-			onDoorOpenedEvent.Invoke();
+			OnDoorOpenedEvent.Invoke();
+			IsOpened = true;
 		}
 
 		protected void OnDoorClosed()
 		{
-			onDoorClosedEvent.Invoke();
+			OnDoorClosedEvent.Invoke();
+			IsOpened = false;
 		}
 	}
 }
