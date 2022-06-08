@@ -15,11 +15,16 @@ namespace Client
 		[SerializeField] [Tooltip("Dont work")]
 		private float timeToCloseDoor = 20;
 
+		[SerializeField] 
+		private AudioClip audioClip;
+
 		private Animator animator;
+		private AudioSource audioSource;
 
 		public void OpenDoor()
 		{
 			animator.SetBool(isOpened, true);
+			if (audioClip != null) audioSource.PlayOneShot(audioClip);
 			OnDoorBeginOpenEvent.Invoke();
 		}
 
@@ -32,11 +37,7 @@ namespace Client
 		private void Start()
 		{
 			animator = GetComponentInChildren<Animator>();
-		}
-
-		private void OnTriggerEnter(Collider other)
-		{
-			if (other.tag == "Player") { }
+			audioSource = GetComponentInChildren<AudioSource>();
 		}
 		#endregion
 	}

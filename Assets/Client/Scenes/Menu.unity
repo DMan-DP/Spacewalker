@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.21533267, g: 0.29223773, b: 0.36889783, a: 1}
+  m_IndirectSpecularColor: {r: 0.35668984, g: 0.48413175, b: 0.61083674, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3505,7 +3505,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "found 8 Modules\r"
+  m_text: "found 5 Modules\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cec3bcaf0e9142e4a8677534dc9a6e65, type: 2}
   m_sharedMaterial: {fileID: -8858477787174366419, guid: cec3bcaf0e9142e4a8677534dc9a6e65,

@@ -72,7 +72,7 @@ namespace Autohand {
         //This was added by request just in case you want to add different layers for left/right hand
         public static string rightHandLayerName = "Hand";
         public static string leftHandLayerName = "Hand";
-        public static string uiHandLayerName = "UI";
+        public static string uiHandLayerName = "Hand UI";
 
 
 

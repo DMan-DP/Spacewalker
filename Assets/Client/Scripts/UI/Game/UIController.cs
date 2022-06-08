@@ -6,9 +6,10 @@ namespace Client
     {
         public GameObject ButtonPanel;
         public GameObject TaskPanel;
+        public GameObject MenuPanel;
         public Vector3 LookAtCameraWorldUp = Vector3.forward;
 
-        private UIState uiState;
+        [SerializeField] private UIState uiState;
 
         private Camera mainCamera;
         private Animator animator;
@@ -27,6 +28,10 @@ namespace Client
             if (uiState == UIState.MainPanel)
             {
                 TaskPanel.transform.LookAt(mainCamera.transform, LookAtCameraWorldUp);
+            }
+            else if (uiState == UIState.MenuPanel)
+            {
+                MenuPanel.transform.LookAt(mainCamera.transform, LookAtCameraWorldUp);
             }
         }
 
