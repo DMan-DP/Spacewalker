@@ -13,8 +13,9 @@ namespace Client
 		public Transform PlayerOffset;
 		[Space] 
 		public UnityEvent OnInitPlayerSequence;
+		public UnityEvent OnContinuePlayerSequence;
 
-		private bool isStarted = false;
+		private bool isInit = false;
 		private static readonly int intro = Animator.StringToHash("Intro");
 		private static readonly int freePlayer = Animator.StringToHash("FreePlayer");
 
@@ -34,7 +35,7 @@ namespace Client
 		
 		public void InitPlayerSequence()
 		{
-			if (isStarted) return;
+			if (isInit) return;
 
 			IsOpened = true;
 			
@@ -50,7 +51,7 @@ namespace Client
 
 		public void FreePlayer()
 		{
-			if (isStarted) return;
+			if (isInit) return;
 			
 			var player = AutoHandPlayer.Instance;
 			player.allowClimbing = true;
@@ -64,9 +65,11 @@ namespace Client
 			AudioSource.clip = closeDoorAudioClip;
 			AudioSource.Play();
 			
-			isStarted = true;
+			isInit = true;
 			Animator.SetBool(intro, false);
 			Animator.SetBool(freePlayer, true);
+			
+			OnContinuePlayerSequence.Invoke();	
 		}
 	}
 }

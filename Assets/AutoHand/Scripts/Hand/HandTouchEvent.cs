@@ -32,9 +32,13 @@ namespace Autohand{
         List<Hand> hands;
 
         public void Touch(Hand hand) {
-            if (enabled == false || handType == HandType.none || (hand.left && handType == HandType.right) || (!hand.left && handType == HandType.left))
+                Debug.Log(1);
+            if (enabled == false || handType == HandType.none || (hand.left && handType == HandType.right) ||
+                (!hand.left && handType == HandType.left))
+            {
                 return;
-
+            }
+            
             if(!hands.Contains(hand)) {
                 if(oneHanded && hands.Count == 0)
                     HandStartTouchEvent?.Invoke(hand);

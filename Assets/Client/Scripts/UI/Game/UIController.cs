@@ -10,6 +10,7 @@ namespace Client
         public Vector3 LookAtCameraWorldUp = Vector3.forward;
 
         [SerializeField] private UIState uiState;
+        private AudioSource audioSource;
 
         private Camera mainCamera;
         private Animator animator;
@@ -19,8 +20,11 @@ namespace Client
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            
             animator = GetComponent<Animator>();
             mainCamera = Camera.main;
+            SetUIState(UIState.Idle);
         }
 
         private void Update()
@@ -37,6 +41,7 @@ namespace Client
 
         public void ButtonPanelClick()
         {
+            audioSource.Play();
             switch (uiState)
             {
                 case UIState.Idle:
@@ -48,6 +53,10 @@ namespace Client
                 case UIState.Scanner:
                 case UIState.MenuPanel:
                 {
+                    if (uiState == UIState.MenuPanel)
+                    {
+                        MenuPanel.GetComponent<GameMenu>().ShowMenuPanel();
+                    }
                     SetUIState(UIState.Idle);
                     break;
                 }
@@ -72,6 +81,8 @@ namespace Client
 
         private void SetUIState(UIState newUIState)
         {
+            audioSource.Play();
+            
             uiState = newUIState;
             switch (newUIState)
             {
@@ -102,7 +113,7 @@ namespace Client
                 }
             }
         }
-
+        
         private enum UIState
         {
             Idle,

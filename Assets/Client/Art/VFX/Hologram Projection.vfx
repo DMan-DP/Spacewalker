@@ -229,7 +229,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 450
+      m_SerializableObject: 550
     m_Space: 2147483647
   m_Property:
     name: Rate
@@ -2781,7 +2781,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614827}
   - {fileID: 8926484042661614829}
   dataType: 0
-  capacity: 450
+  capacity: 550
   stripCapacity: 16
   particlePerStripCount: 16
   needsComputeBounds: 0
@@ -2810,7 +2810,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614899}
   m_ExposedName: Size
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -3355,7 +3355,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614952}
   m_ExposedName: Scale
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:

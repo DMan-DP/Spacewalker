@@ -7,6 +7,7 @@ namespace Client
     public class SceneLoader : SingletonBehaviour<SceneLoader>
     {
         public UnityEvent SceneLoadedEvent;
+        public UnityEvent BlackoutClosedEvent;
         
         private float loadingPercent;
         public static bool IsLoading { get; private set; } = false;
@@ -30,11 +31,12 @@ namespace Client
             if (shouldPlayOpeningAnimation)
             {
                 instance.blackoutAnimator.SetTrigger(sceneOpening);
-                shouldPlayOpeningAnimation = false; 
+                shouldPlayOpeningAnimation = false;
+                SceneLoadedEvent.Invoke();
             }
         }
 
-        public static void SwitchToScene(string sceneName, bool blackoutRequired = false)
+        public static void SwitchToScene(string sceneName, bool forceBlackoutRequired = false)
         {
             var instance = GetInstance();
             instance.loadingSceneOperation = SceneManager.LoadSceneAsync(sceneName);
@@ -45,7 +47,7 @@ namespace Client
             
             instance.loadingPercent = 0;
 
-            if (blackoutRequired)
+            if (forceBlackoutRequired)
             {
                 instance.blackoutAnimator.SetTrigger(sceneClosing);
             }
@@ -78,14 +80,13 @@ namespace Client
         
         public void OnAnimationOver()
         {
-            // Чтобы при открытии сцены, куда мы переключаемся, проигралась анимация opening:
             shouldPlayOpeningAnimation = true;
             loadingSceneOperation.allowSceneActivation = true;
         }
 
         public void SceneLoadContinue()
         {
-            SceneLoadedEvent.Invoke();
+            BlackoutClosedEvent.Invoke();
         }
     }
 }

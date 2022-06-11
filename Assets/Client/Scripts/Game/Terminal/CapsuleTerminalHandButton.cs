@@ -35,6 +35,7 @@ namespace Client.Gameplay
 			{
 				TerminalAudioSource.clip = NonInteractableClip;
 				TerminalAudioSource.Play();
+				return;
 			}
 			
 			if (!isLocked)

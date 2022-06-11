@@ -184,8 +184,11 @@ namespace Autohand {
         private CollisionTracker _collisionTracker;
         public CollisionTracker collisionTracker {
             get {
-                if(_collisionTracker == null)
+                if (_collisionTracker == null)
+                {
                     _collisionTracker = gameObject.AddComponent<CollisionTracker>();
+                    _collisionTracker.disableCollisionTracking = true;
+                }
                 return _collisionTracker;
             }
             protected set {

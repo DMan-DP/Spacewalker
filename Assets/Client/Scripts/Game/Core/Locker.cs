@@ -16,13 +16,8 @@ namespace Client
         private Material material;
         private static readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 
-        public void SetLock(bool value, bool forceChange = false)
+        public void SetLock(bool value)
         {
-            if (isLocked == value && !forceChange)
-            {
-                return;
-            }
-            
             isLocked = value;
             
             if (isLocked)
@@ -41,7 +36,7 @@ namespace Client
         private void Start()
         {
             material = lockerBody.GetComponent<MeshRenderer>().material;
-            SetLock(isLocked, true);
+            SetLock(isLocked);
         }
         #endregion
     }
