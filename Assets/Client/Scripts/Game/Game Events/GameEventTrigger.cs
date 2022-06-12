@@ -8,12 +8,10 @@ namespace Client
 	{
 		[SerializeField] private bool oneOffEvent = true;
 		[SerializeField] protected UnityEvent gameEvent;
-		
-		private static string playerTag = "Player";
-		
+
 		public void OnTriggerEnter(Collider other)
 		{
-			if (other.tag == playerTag)
+			if (other.tag == "MainCamera")
 			{
 				gameEvent.Invoke();
 				

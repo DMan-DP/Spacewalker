@@ -1,3 +1,4 @@
+using System.Collections;
 using Autohand;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Client
     {
         [SerializeField] private Hand hand;
         private CollisionTracker collisionTracker;
+        private bool isCanTriggering = true;
+        private bool isTriggeing = false;
 
         private void Awake()
         {
@@ -33,13 +36,27 @@ namespace Client
 
         private void OnTriggerLastExit(GameObject From)
         {
-            if(From.CanGetComponent(out HandTouchEvent touchEvent)) touchEvent.Touch(hand);
+            if (From.CanGetComponent(out HandTouchEvent touchEvent) && isCanTriggering && !isTriggeing)
+            {
+                touchEvent.Touch(hand);
+                isCanTriggering = false;
+                isTriggeing = true;
+                StartCoroutine(TriggerDelay());
+            }
         }
 
         private void OnTriggerFirstEnter(GameObject From) {
-            if(From.CanGetComponent(out HandTouchEvent touchEvent)) touchEvent.Untouch(hand); 
+            if(From.CanGetComponent(out HandTouchEvent touchEvent) && isTriggeing)
+            {
+                isTriggeing = false;
+                touchEvent.Untouch(hand);
+            }
         }
-        
-        
+
+        private IEnumerator TriggerDelay()
+        {
+            yield return new WaitForSeconds(0.25f);
+            isCanTriggering = true;
+        }
     }
 }
