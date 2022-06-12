@@ -801,14 +801,18 @@ namespace Autohand {
 
 
         protected virtual void OnCollisionFirstEnter(GameObject collision) {
+            /*
             if(collision.CanGetComponent(out HandTouchEvent touchEvent)) {
                 touchEvent.Touch(this);
             }
+            */
         }
 
         protected virtual void OnCollisionLastExit(GameObject collision) {
+            /*
             if(collision.CanGetComponent(out HandTouchEvent touchEvent))
                 touchEvent.Untouch(this);
+            */
         }
 
         protected virtual void OnTriggerFirstEnter(GameObject other) {

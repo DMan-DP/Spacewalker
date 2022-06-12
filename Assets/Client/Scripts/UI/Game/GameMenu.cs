@@ -9,6 +9,8 @@ namespace Client
 		public GameObject ConfirmExitPanel;
 		public GameObject SettingsPanel;
 
+		private bool isLoad = false;
+		
 		private void Start()
 		{
 			ShowPanel(MenuPanel);
@@ -46,12 +48,21 @@ namespace Client
 
 		public void ExitGame()
 		{
+			if (isLoad) return;
+			DisablePlayer();
 			SceneLoader.SwitchToScene("Menu", true);
 		}
 
 		public void RestartGame()
 		{
+			if (isLoad) return;
+			DisablePlayer();
 			SceneLoader.SwitchToScene("Spaceship", true);
+		}
+
+		private void DisablePlayer()
+		{
+			isLoad = true;
 		}
 	}
 }

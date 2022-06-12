@@ -187,7 +187,6 @@ namespace Autohand {
                 if (_collisionTracker == null)
                 {
                     _collisionTracker = gameObject.AddComponent<CollisionTracker>();
-                    _collisionTracker.disableCollisionTracking = true;
                 }
                 return _collisionTracker;
             }

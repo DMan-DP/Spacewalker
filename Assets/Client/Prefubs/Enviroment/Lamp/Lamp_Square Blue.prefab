@@ -315,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 30fc44df8ef19a04bb6fc1754b957f3e,
         type: 3}
       propertyPath: m_Name
-      value: Lamp_Square
+      value: Lamp_Square Blue
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 30fc44df8ef19a04bb6fc1754b957f3e,
         type: 3}

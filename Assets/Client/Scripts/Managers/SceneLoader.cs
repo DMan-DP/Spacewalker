@@ -1,3 +1,5 @@
+using Autohand;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -53,7 +55,7 @@ namespace Client
             }
         }
         
-        public static void StartLoadScene()
+        public void StartLoadScene()
         {
             if (IsLoading)
             {
@@ -62,7 +64,7 @@ namespace Client
             }
         }
 
-        public static bool IsSceneLoaded()
+        public bool IsSceneLoaded()
         {
             var loadingSceneOperation = GetInstance().loadingSceneOperation;
             return loadingSceneOperation != null && loadingSceneOperation.isDone;
@@ -80,6 +82,13 @@ namespace Client
         
         public void OnAnimationOver()
         {
+            var player = AutoHandPlayer.Instance;
+            player.gameObject.SetActive(false);
+
+            var handLeft = player.handLeft;
+            handLeft.gameObject.SetActive(false);
+            player.handRight.gameObject.SetActive(false);
+            
             shouldPlayOpeningAnimation = true;
             loadingSceneOperation.allowSceneActivation = true;
         }

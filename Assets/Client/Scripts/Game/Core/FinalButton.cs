@@ -21,11 +21,12 @@ namespace Client
         [Space] 
         public AudioSource DoorAudioSource;
         
-        private bool isLocked;
+        private bool isLocked = true;
+        private bool isEnding = false;
         
         public void OpenDoor()
         {
-            isLocked = true;
+            isLocked = false;
             
             ButtonSprite[0].material = ButtonPlaneMaterial;
             for (int i = 1; i < ButtonSprite.Length; i++)
@@ -39,7 +40,9 @@ namespace Client
 
         public void Click()
         {
-            if (isLocked)
+            if (isEnding) return;
+            
+                if (isLocked)
             {
                 AudioSource.PlayOneShot(NonInteracableClip);
             }
@@ -48,6 +51,7 @@ namespace Client
                 AudioSource.PlayOneShot(InteracableClip);
                 DoorAudioSource.Play();
                 SceneLoader.SwitchToScene("EndTitle", true);
+                isEnding = true;
             }
         }
     }

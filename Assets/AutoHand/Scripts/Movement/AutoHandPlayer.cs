@@ -972,6 +972,8 @@ namespace Autohand
 		{
 			if (!allowClimbing)
 				return;
+			
+			body.velocity = Vector3.zero;
 
 			if (!climbing.ContainsKey(hand) && grab != null && grab.CanGetComponent(out Climbable climbbable) &&
 			    climbbable.enabled)

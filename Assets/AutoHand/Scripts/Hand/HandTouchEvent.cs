@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 namespace Autohand{
     [HelpURL("https://www.notion.so/Touch-Events-1341b3e627dd443a99593ff7f0412aa6")]
+    [SelectionBase]
     public class HandTouchEvent : MonoBehaviour{
         [Header("For Solid Collision")]
         [Tooltip("Whether or not first hand to enter should take ownership and be the only one to call events")]
@@ -32,7 +33,6 @@ namespace Autohand{
         List<Hand> hands;
 
         public void Touch(Hand hand) {
-                Debug.Log(1);
             if (enabled == false || handType == HandType.none || (hand.left && handType == HandType.right) ||
                 (!hand.left && handType == HandType.left))
             {

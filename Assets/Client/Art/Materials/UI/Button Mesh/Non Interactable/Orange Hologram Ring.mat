@@ -46,12 +46,13 @@ Material:
     - _FrenelPower: 0.9
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Rotate_UV_in_UV_mode: 0
     - _ScrollSpeed: -0.1
     - _Use_UV: 0
     m_Colors:
     - _BaseColor: {r: 2.877349, g: 0.97434044, b: 0, a: 1}
     - _FresnelColor: {r: 0, g: 0.4862745, b: 1.4980392, a: 1}
-    - _HologramTextureTiling: {r: 1, g: 32, b: 0, a: 0}
+    - _HologramTextureTiling: {r: 1, g: 40, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3689920437173889751
 MonoBehaviour:

@@ -6,6 +6,7 @@ namespace Client
 	public class PlayerFlyLocomotion : MonoBehaviour
 	{
 		[SerializeField] private float speed = 1f;
+		[SerializeField] private float speedVelocity = 2f;
 		[HideInInspector] public bool PlayerCanFly = false;
 
 		private AutoHandPlayer autoHandPlayer;
@@ -15,15 +16,22 @@ namespace Client
 		private bool isFly;
 		private bool leftHandActive;
 		private bool rightHandActive;
+		[SerializeField] private Vector3 previousVelocity;
+		[SerializeField] private Vector3 velocity;
 
 		private void TryBeginFly()
 		{
-			if (CanFly()) isFly = true;
+			if (CanFly() && !isFly) isFly = true;
 		}
 
 		private void TryEndFly()
 		{
-			if (!CanFly()) isFly = false;
+			if (!CanFly() && isFly)
+			{
+				isFly = false;
+				autoHandPlayer.body.velocity = previousVelocity * speed;
+				previousVelocity = Vector3.zero;
+			}
 		}
 
 		private bool CanFly()
@@ -33,8 +41,10 @@ namespace Client
 
 		private void ApplyVelocity()
 		{
-			var velocity = CollectVelocity();
-			autoHandPlayer.AddVelocity(velocity * Time.fixedDeltaTime * speed, ForceMode.VelocityChange);
+			previousVelocity = velocity;
+			velocity = CollectVelocity();
+			//autoHandPlayer.AddVelocity(velocity * speed);
+			autoHandPlayer.body.velocity = Vector3.Lerp(previousVelocity, velocity * speed, Time.fixedTime * speedVelocity);
 		}
 
 		private Vector3 CollectVelocity()

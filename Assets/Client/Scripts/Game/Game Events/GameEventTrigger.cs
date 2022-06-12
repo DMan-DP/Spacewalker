@@ -11,13 +11,16 @@ namespace Client
 		
 		private static string playerTag = "Player";
 		
-		private void OnTriggerEnter(Collider other)
+		public void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag(playerTag)) gameEvent.Invoke();
-
-			if (oneOffEvent)
+			if (other.tag == playerTag)
 			{
-				Destroy(gameObject);
+				gameEvent.Invoke();
+				
+				if (oneOffEvent)
+				{
+					Destroy(gameObject);
+				}
 			}
 		}
 	}

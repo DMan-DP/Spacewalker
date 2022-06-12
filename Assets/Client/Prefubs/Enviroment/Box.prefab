@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662277078808106204}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1199899, y: -0.049999952, z: 0.44790512}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   parentOnGrab: 0
   throwPower: 1
   jointBreakForce: 3500
-  showAdvancedSettings: 1
+  showAdvancedSettings: 0
   handType: 0
   grabType: 0
   useGentleGrab: 0

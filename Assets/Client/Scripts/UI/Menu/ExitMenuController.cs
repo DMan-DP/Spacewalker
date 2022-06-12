@@ -9,7 +9,9 @@ namespace Client
         public GameObject ExitButton;
         public GameObject ConfirmExitPanel;
         private bool showPanel = false;
-        
+        private static readonly int hideButton = Animator.StringToHash("HideButton");
+        private static readonly int showButton = Animator.StringToHash("ShowButton");
+
         private void Start()
         {
             ExitButton.SetActive(true);
@@ -18,7 +20,7 @@ namespace Client
         
         public void ShowConfirmMenu()
         {
-            ExitButton.GetComponent<Animator>().SetBool("IsHideButton", true);
+            ExitButton.GetComponent<Animator>().SetTrigger(hideButton);
             ExitButton.GetComponent<Collider>().enabled = false;
             StartCoroutine(ShowPanel());
         }
@@ -26,7 +28,7 @@ namespace Client
         public void HideConfirmMenu()
         {
             ConfirmExitPanel.SetActive(false);
-            ExitButton.GetComponent<Animator>().SetBool("IsHideButton", false);
+            ExitButton.GetComponent<Animator>().SetTrigger(showButton);
             ExitButton.GetComponent<Collider>().enabled = true;
         }
 

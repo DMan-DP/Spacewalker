@@ -13,6 +13,7 @@ namespace Client
         public GameObject EnterButton;
 
         private bool isNewGame = false;
+        private static readonly int hideButton = Animator.StringToHash("HideButton");
 
         private void Start()
         {
@@ -22,7 +23,7 @@ namespace Client
         public void ShowMainMenu()
         {
             EnterButton.GetComponent<Collider>().enabled = false;
-            EnterButton.GetComponent<Animator>().SetBool("IsHideButton", true);
+            EnterButton.GetComponent<Animator>().SetTrigger(hideButton);
             StartCoroutine(ShowMainMenuPanel());
         }
 

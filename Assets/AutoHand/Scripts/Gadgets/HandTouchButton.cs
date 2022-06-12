@@ -13,8 +13,6 @@ namespace AutoHand {
         public HandTouchEvent touchEvent;
         public Transform button;
         public Vector3 pressOffset;
-        public Color unpressColor = Color.white;
-        public Color pressColor = Color.white;
 
         public bool toggle = true;
 
