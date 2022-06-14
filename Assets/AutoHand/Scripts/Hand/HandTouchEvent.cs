@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,17 +21,17 @@ namespace Autohand{
         public HandEvent HandStopTouchEvent;
 
         private void OnEnable() {
-            hands = new List<Hand>();
-            HandStartTouchEvent += (hand) => HandStartTouch?.Invoke(hand);
-            HandStopTouchEvent += (hand) => HandStopTouch?.Invoke(hand);
+            //HandStartTouchEvent += (hand) => HandStartTouch?.Invoke(hand);
+           // HandStopTouchEvent += (hand) => HandStopTouch?.Invoke(hand);
         }
 
-        private void OnDisable() {
-            HandStartTouchEvent -= (hand) => HandStartTouch?.Invoke(hand);
-            HandStopTouchEvent -= (hand) => HandStopTouch?.Invoke(hand);
+        private void OnDisable()
+        {
+            //HandStartTouchEvent -= (hand) => HandStartTouch?.Invoke(hand);
+           // HandStopTouchEvent -= (hand) => HandStopTouch?.Invoke(hand);
         }
         
-        List<Hand> hands;
+        List<Hand> hands = new List<Hand>();
 
         public void Touch(Hand hand) {
             if (enabled == false || handType == HandType.none || (hand.left && handType == HandType.right) ||
@@ -41,9 +42,15 @@ namespace Autohand{
             
             if(!hands.Contains(hand)) {
                 if(oneHanded && hands.Count == 0)
+                {
+                    HandStartTouch?.Invoke(hand);
                     HandStartTouchEvent?.Invoke(hand);
+                }
                 else
+                {
+                    HandStartTouch?.Invoke(hand);
                     HandStartTouchEvent?.Invoke(hand);
+                }
 
                 hands.Add(hand);
             }
@@ -54,10 +61,14 @@ namespace Autohand{
                 return;
 
             if(hands.Contains(hand)) {
-                if(oneHanded && hands[0] == hand){
+                if(oneHanded && hands[0] == hand)
+                {
+                    HandStopTouch?.Invoke(hand);
                     HandStopTouchEvent?.Invoke(hand);
                 }
-                else if(!oneHanded){
+                else if(!oneHanded)
+                {
+                    HandStopTouch?.Invoke(hand);
                     HandStopTouchEvent?.Invoke(hand);
                 }
 

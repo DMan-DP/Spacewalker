@@ -7,7 +7,6 @@ namespace Client
         public GameObject ButtonPanel;
         public GameObject TaskPanel;
         public GameObject MenuPanel;
-        public Vector3 LookAtCameraWorldUp = Vector3.forward;
 
         [SerializeField] private UIState uiState;
         private AudioSource audioSource;
@@ -25,18 +24,6 @@ namespace Client
             animator = GetComponent<Animator>();
             mainCamera = Camera.main;
             SetUIState(UIState.Idle);
-        }
-
-        private void Update()
-        {
-            if (uiState == UIState.MainPanel)
-            {
-                TaskPanel.transform.LookAt(mainCamera.transform, LookAtCameraWorldUp);
-            }
-            else if (uiState == UIState.MenuPanel)
-            {
-                MenuPanel.transform.LookAt(mainCamera.transform, LookAtCameraWorldUp);
-            }
         }
 
         public void ButtonPanelClick()

@@ -7,36 +7,12 @@ namespace Client
     public class FingerTriggerHandler : MonoBehaviour
     {
         [SerializeField] private Hand hand;
-        private CollisionTracker collisionTracker;
         private bool isCanTriggering = true;
         private bool isTriggeing = false;
 
-        private void Awake()
+        private void OnTriggerEnter(Collider other)
         {
-            collisionTracker = GetComponent<CollisionTracker>();
-        }
-
-        private void OnEnable()
-        {
-            collisionTracker.OnTriggerFirstEnter += OnTriggerFirstEnter;
-            collisionTracker.OnTriggeLastExit += OnTriggerLastExit;
-            
-            //collisionTracker.OnCollisionFirstEnter += OnTriggerFirstEnter;
-            //collisionTracker.OnCollisionLastExit += OnTriggerLastExit;
-        }
-
-        private void OnDisable()
-        {
-           collisionTracker.OnTriggerFirstEnter -= OnTriggerFirstEnter;
-           collisionTracker.OnTriggeLastExit -= OnTriggerLastExit;
-            
-           //collisionTracker.OnCollisionFirstEnter -= OnTriggerFirstEnter;
-           //collisionTracker.OnCollisionLastExit -= OnTriggerLastExit;
-        }
-
-        private void OnTriggerLastExit(GameObject From)
-        {
-            if (From.CanGetComponent(out HandTouchEvent touchEvent) && isCanTriggering && !isTriggeing)
+            if (isCanTriggering && !isTriggeing && other.CanGetComponent(out HandTouchEvent touchEvent))
             {
                 touchEvent.Touch(hand);
                 isCanTriggering = false;
@@ -45,8 +21,14 @@ namespace Client
             }
         }
 
-        private void OnTriggerFirstEnter(GameObject From) {
-            if(From.CanGetComponent(out HandTouchEvent touchEvent) && isTriggeing)
+        private void OnTriggerStay(Collider other)
+        {
+            isTriggeing = true;
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(isTriggeing && other.CanGetComponent(out HandTouchEvent touchEvent))
             {
                 isTriggeing = false;
                 touchEvent.Untouch(hand);
@@ -55,7 +37,7 @@ namespace Client
 
         private IEnumerator TriggerDelay()
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.5f);
             isCanTriggering = true;
         }
     }
